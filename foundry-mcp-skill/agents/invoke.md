@@ -61,6 +61,8 @@ Call `agent_invoke` with:
 - `conversationId` if continuing a thread
 - `sessionId` if the hosted environment needs sticky routing
 
+For tool-using prompt agents, inspect the returned `output` items to confirm the expected tool was actually used.
+
 ### Step 4: Continue a conversation
 
 For follow-up turns:
@@ -84,3 +86,9 @@ For follow-up turns:
 - Separate MCP transport auth failures from `agent_invoke` payload or runtime failures.
 - If the user wants a brand new thread, omit `conversationId` and create a new `sessionId` only if the runtime model requires one.
 - For hosted agents, container status is part of the workflow, not an optional diagnostic.
+- For a newly created tool-using agent, run at least one happy-path invocation and one ambiguity check when the prompt says the agent should ask follow-up questions.
+
+## Example User Prompts
+
+- `Use foundry-mcp-skill to invoke local-time-agent in my current Foundry project with 'What time is it in Seattle right now?' and tell me whether it used web search.`
+- `Use foundry-mcp-skill to test local-time-agent with 'What time is it in Portland right now?' and confirm whether it asks a clarification question instead of guessing.`

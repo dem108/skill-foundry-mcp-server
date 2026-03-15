@@ -142,6 +142,8 @@ Use `prompt_optimize` to iteratively improve a system prompt or developer messag
 - If MCP transport auth fails in the user's client, route to `manual-auth.md` before giving up on the Foundry MCP path.
 - When a workflow can mutate state, verify the target first with a read operation whenever practical.
 - Reuse returned IDs like `conversationId`, evaluation IDs, or dataset versions instead of regenerating state.
+- For agent workflows, prefer an end-to-end loop: resolve project scope, create or update the agent, then invoke it with a realistic smoke test before declaring the workflow complete.
+- Agent workflows are especially useful when the user wants one request to cover setup plus validation, such as creating an agent and immediately verifying that it can answer a real prompt with the intended tools.
 
 ## Prerequisites
 

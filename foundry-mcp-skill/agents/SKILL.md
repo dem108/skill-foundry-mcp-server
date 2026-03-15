@@ -41,6 +41,18 @@ Choose the narrower workflow before calling tools:
 4. If you are creating or updating an agent, retrieve the schema first with `agent_definition_schema_get` unless you already have a validated definition from the same session.
 5. For hosted agents, treat container status as a first-class pre-check.
 
+## Practical Guidance
+
+- Use this skill when the user wants an end-to-end agent workflow: resolve the project, create or update the agent, then invoke it to verify behavior.
+- For prompt agents that need live public information, prefer `web_search_preview` before introducing custom backends.
+- After creating a tool-using agent, do a realistic smoke test and confirm the tool was actually used.
+
+## Example User Prompts
+
+- `Use foundry-mcp-skill to create a prompt agent called local-time-agent in my current Foundry project. Use gpt-5.2-chat. It should answer what time it is in a user-provided location by using web search instead of guessing, ask a short clarification question for ambiguous places, and then show me the final stored agent definition.`
+- `Use foundry-mcp-skill to invoke local-time-agent in my current Foundry project with 'What time is it in Seattle right now?' and tell me whether it used web search.`
+- `Use foundry-mcp-skill to smoke-test local-time-agent with Tokyo, London, and Portland so we can verify normal lookups and ambiguity handling.`
+
 ## Common Workflow Patterns
 
 | Intent | Read Next | Typical Tool Sequence |
