@@ -1,4 +1,4 @@
-# foundry-mcp-skill
+# skill-foundry-mcp-server
 
 An agent skill for working with the [Foundry MCP Server](https://learn.microsoft.com/azure/foundry/mcp/get-started?view=foundry&tabs=user).
 
