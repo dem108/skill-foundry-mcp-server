@@ -1,6 +1,6 @@
 # foundry-mcp-skill
 
-A Copilot skill for working with the Foundry MCP Remote server.
+An agent skill for working with the [Foundry MCP Server](https://learn.microsoft.com/azure/foundry/mcp/get-started?view=foundry&tabs=user).
 
 ## Why
 
