@@ -1,2 +1,6 @@
 __pycache__/
 *.pyc
+
+# VS Code MCP config
+.vscode/mcp.*.json
+!.vscode/mcp.json
