@@ -15,6 +15,8 @@ The Foundry MCP Server endpoint is `https://mcp.ai.azure.com`.
 
 > **MANDATORY for model discovery:** If the user gives a model family or partial name, start with `model_catalog_list` and explore related catalog entries before calling `model_details_get`. Do not assume the first matching detail record is the intended model.
 
+> **MANDATORY for model deployment:** If a deployment create or update flow is missing `skuName`, inspect comparable deployments in the same Foundry account first and infer a likely supported SKU before calling `model_deploy`. If the first attempt fails with an unsupported-SKU error, retry once with the next best candidate instead of repeating the same default.
+
 > **MANDATORY for client auth failures:** If the user's MCP client cannot complete OAuth DCR against the Foundry MCP Server at `https://mcp.ai.azure.com`, offer the manual bearer-token fallback in [manual-auth.md](manual-auth.md). This is especially relevant for non-Copilot environments or tools where DCR is currently unreliable.
 
 | Sub-Skill | When to Use | Reference |
@@ -139,6 +141,7 @@ Use `prompt_optimize` to iteratively improve a system prompt or developer messag
 - Use `ask_user` only when a required identifier or behavioral choice is unresolved.
 - For multi-step workflows, summarize the plan briefly, execute the MCP calls in the documented order, and report the concrete outcome.
 - For model-family requests, prefer one or more `model_catalog_list` passes to understand nearby variants before narrowing to `model_details_get`.
+- For deployment-mutation workflows, treat SKU selection as part of identifier resolution: reuse explicit user input first, otherwise inspect comparable deployments in the same account before relying on a guessed default.
 - If MCP transport auth fails in the user's client, route to `manual-auth.md` before giving up on the Foundry MCP path.
 - When a workflow can mutate state, verify the target first with a read operation whenever practical.
 - Reuse returned IDs like `conversationId`, evaluation IDs, or dataset versions instead of regenerating state.

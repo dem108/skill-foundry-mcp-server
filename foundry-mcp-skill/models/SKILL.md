@@ -38,6 +38,7 @@ Choose the narrower workflow before acting:
 3. Resolve `region` and subscription only for quota workflows that need them explicitly.
 4. If the user names a model but not a deployment, separate model catalog work from deployment work.
 5. If the user gives a model family or partial name, treat `model_catalog_list` as the required first step. Use one or more catalog-list queries to understand related variants before calling `model_details_get`.
+6. If the workflow creates or updates a deployment and the user did not specify `skuName`, inspect comparable deployments in the same account first so the skill can infer a likely supported SKU instead of relying on a default.
 
 ## Common Routes
 
@@ -57,4 +58,5 @@ Choose the narrower workflow before acting:
 - For discovery, list before get: use `model_catalog_list` to find exact and nearby variants, then use `model_details_get` only for the chosen catalog entry.
 - If a query like `gpt-5.4` could map to multiple related entries such as `gpt-5.4` and `gpt-5.4-pro`, keep exploring the catalog until the target is clear.
 - Verify the account scope before mutating deployments.
+- When `skuName` is missing for a deployment create/update flow, use nearby deployments as the primary hint for a supported SKU and retry once on unsupported-SKU errors with a better candidate.
 - Use recommendation and similar-model tools as advisory outputs; do not auto-switch a deployment unless the user explicitly asks.
