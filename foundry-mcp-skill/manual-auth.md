@@ -39,6 +39,8 @@ The fallback script lives at `foundry-mcp-skill/scripts/manual_mcp_client.py`.
 
 By default the script uses `https://mcp.ai.azure.com`. Set `FOUNDRY_MCP_SERVER_URL` only if you need to override that endpoint.
 
+In agentic CLIs such as Copilot, OpenCode, or similar tools, do not print the token value into the conversation. If you acquire a token with Azure CLI or another helper, keep it in an environment variable and pass it only to the command or tool that needs it.
+
 Then run `python scripts/manual_mcp_client.py --list-tools` to verify that:
 - the script can acquire a token with `az account get-access-token --resource https://mcp.ai.azure.com`
 - the bearer token is accepted by the MCP server
@@ -64,4 +66,5 @@ Reuse the returned `conversationId` and `sessionId` values if you want to contin
 
 - Treat this as a fallback for broken or unavailable OAuth DCR support.
 - Keep the bearer token in memory or an environment variable; avoid writing it to disk.
+- Never echo bearer tokens, API keys, or secret header values back to the user in chat output.
 - Do not confuse transport authentication to the MCP server with Foundry workflow identifiers like `projectEndpoint`.
