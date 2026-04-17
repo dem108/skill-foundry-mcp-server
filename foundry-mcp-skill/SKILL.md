@@ -1,6 +1,6 @@
 ---
 name: foundry-mcp-skill
-description: "**WORKFLOW SKILL** — Orchestrate the Foundry MCP Remote server for agents, model deployments, evaluations, project connections, and prompt optimization. WHEN: \"foundry MCP\", \"remote Foundry server\", \"manage Foundry agent\", \"deploy or inspect model\", \"run evaluation\", \"manage project connection\", \"optimize prompt\". INVOKES: remote Foundry MCP tools first; ask the user only for unresolved identifiers. FOR SINGLE OPERATIONS: read the matching sub-skill or call the specific MCP tool directly."
+description: "**WORKFLOW SKILL** — Orchestrate the Foundry MCP Remote server for agents, model deployments, batch or continuous evaluations, project connections, and prompt optimization. WHEN: \"foundry MCP\", \"remote Foundry server\", \"manage Foundry agent\", \"deploy or inspect model\", \"run evaluation\", \"configure continuous eval\", \"manage project connection\", \"optimize prompt\". INVOKES: remote Foundry MCP tools first; ask the user only for unresolved identifiers. FOR SINGLE OPERATIONS: read the matching sub-skill or call the specific MCP tool directly."
 ---
 
 # Foundry MCP Skill
@@ -25,7 +25,7 @@ The Foundry MCP Server endpoint is `https://mcp.ai.azure.com`.
 |-----------|-------------|-----------|
 | **agents** | Create, inspect, clone, invoke, delete, or operate hosted agent containers | [agents/SKILL.md](agents/SKILL.md) |
 | **models** | Browse model catalog, inspect deployments, deploy or delete models, check quota, monitoring, deprecation, benchmarks, or recommendations | [models/SKILL.md](models/SKILL.md) |
-| **evaluations** | Manage datasets, evaluator catalog entries, batch evaluation runs, and evaluation comparisons | [evaluations/SKILL.md](evaluations/SKILL.md) |
+| **evaluations** | Manage datasets, evaluator catalog entries, batch or continuous evaluation workflows, and evaluation comparisons | [evaluations/SKILL.md](evaluations/SKILL.md) |
 | **project-connections** | Discover metadata and manage project connections and datastores | [project-connections/project-connections.md](project-connections/project-connections.md) |
 | **prompt-optimizer** | Optimize developer prompts or refine an existing system message against a deployed model | [prompt-optimizer/prompt-optimizer.md](prompt-optimizer/prompt-optimizer.md) |
 
@@ -45,6 +45,7 @@ Match the user's request to the most specific workflow and read that document be
 | Register datasets or custom evaluators | `evaluations/datasets-and-evaluators.md` |
 | Run agent-target or dataset-target batch evaluations | `evaluations/runs-and-comparisons.md` |
 | Compare evaluation runs | `evaluations/runs-and-comparisons.md` |
+| Enable, inspect, or disable continuous evaluation for an agent | `evaluations/continuous-evals.md` |
 | List, create, update, or delete project connections | `project-connections/project-connections.md` |
 | Improve a system prompt or developer message | `prompt-optimizer/prompt-optimizer.md` |
 
@@ -63,7 +64,7 @@ Only ask for values that are still missing after checking the user request and t
 | `foundryProjectResourceId` | `/subscriptions/{sub}/resourceGroups/{rg}/providers/Microsoft.CognitiveServices/accounts/{account}/projects/{project}` | project connections |
 | `agentName` | logical agent name | agent management and invocation |
 | `deploymentName` | model deployment name | deployment, monitoring, and optimizer workflows |
-| `datasetName` / `evaluationId` / `runId` | Foundry evaluation identifiers | evaluation workflows |
+| `datasetName` / `evaluationId` / `runId` / `configId` | Foundry evaluation identifiers | evaluation workflows |
 
 ### Resolution order
 
@@ -109,7 +110,7 @@ Use model workflows for catalog discovery, deployment management, and operationa
 
 ### Evaluations
 
-Use evaluation workflows for both preparation and execution:
+Use evaluation workflows for preparation, batch execution, continuous evaluation, and comparison:
 - `evaluation_dataset_get`
 - `evaluation_dataset_create`
 - `evaluation_dataset_versions_get`
@@ -122,6 +123,9 @@ Use evaluation workflows for both preparation and execution:
 - `evaluation_get`
 - `evaluation_comparison_get`
 - `evaluation_comparison_create`
+- `continuous_eval_get`
+- `continuous_eval_create`
+- `continuous_eval_delete`
 
 ### Project connections
 

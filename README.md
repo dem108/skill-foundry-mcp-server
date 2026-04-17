@@ -8,7 +8,7 @@ An agent skill for working with the [Foundry MCP Server](https://learn.microsoft
 
 - **Agents**: Create, deploy, invoke, and manage hosted/prompt agents
 - **Models**: Browse catalogs, deploy models, monitor usage, check quotas
-- **Evaluations**: Run batch evaluations, compare results, manage datasets
+- **Evaluations**: Run batch or continuous evaluations, compare results, manage datasets
 - **Project connections**: Configure datastores and external connections
 - **Prompt optimization**: Iteratively improve system prompts
 
@@ -77,6 +77,7 @@ For more examples and available tools, see the [Foundry MCP Server documentation
 - `foundry-mcp-skill/agents/` — agent workflows
 - `foundry-mcp-skill/models/` — model workflows
 - `foundry-mcp-skill/evaluations/` — evaluation workflows
+- `foundry-mcp-skill/evaluations/continuous-evals.md` — continuous evaluation workflows
 - `foundry-mcp-skill/project-connections/` — project connection workflows
 - `foundry-mcp-skill/prompt-optimizer/` — prompt optimizer workflow
 - `foundry-mcp-skill/manual-auth.md` — bearer-token fallback guidance
